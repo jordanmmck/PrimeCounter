@@ -29,8 +29,8 @@ contract PrimeCounter {
 
     function _countPrimes(uint256[] memory tokenIds) internal pure returns (uint256) {
         uint256 primeCount;
-
-        for (uint256 i; i < tokenIds.length;) {
+        uint256 len = tokenIds.length;
+        for (uint256 i; i < len;) {
             if (_isPrime(tokenIds[i])) {
                 primeCount++;
             }
@@ -43,18 +43,14 @@ contract PrimeCounter {
     }
 
     function _isPrime(uint256 n) private pure returns (bool) {
-        if (n < 2) {
-            return false;
-        }
-        if (n == 2) {
-            return true;
-        }
-        if (n % 2 == 0) {
-            return false;
-        }
-        for (uint256 i = 3; i * i <= n; i += 2) {
-            if (n % i == 0) {
-                return false;
+        if (n < 2) return false;
+        if (n == 2) return true;
+        if (n % 2 == 0) return false;
+
+        for (uint256 i = 3; i * i <= n;) {
+            if (n % i == 0) return false;
+            unchecked {
+                i += 2;
             }
         }
         return true;

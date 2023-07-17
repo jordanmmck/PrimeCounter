@@ -12,7 +12,7 @@ contract NFTprimes is ERC721Enumerable {
 
     function mint() public {
         require(currentSupply < MAX_SUPPLY, "Max supply reached");
-        _safeMint(msg.sender, currentSupply);
         currentSupply++;
+        _safeMint(msg.sender, currentSupply);
     }
 }

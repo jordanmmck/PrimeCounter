@@ -16,46 +16,30 @@ contract PrimeCounterTest is Test {
     }
 
     function testPrimeCounter() public {
-        // alice will own [0, 1, 2, 3, 4, 5, 6, 7]
         vm.startPrank(alice);
-        nftPrimes.mint();
-        nftPrimes.mint();
-        nftPrimes.mint();
-        nftPrimes.mint();
-        nftPrimes.mint();
-        nftPrimes.mint();
-        nftPrimes.mint();
-        nftPrimes.mint();
+        nftPrimes.mint(); // 1
+        nftPrimes.mint(); // 2 PRIME
+        nftPrimes.mint(); // 3 PRIME
+        nftPrimes.mint(); // 4
+        nftPrimes.mint(); // 5 PRIME
+        nftPrimes.mint(); // 6
+        nftPrimes.mint(); // 7 PRIME
+        nftPrimes.mint(); // 8
+        nftPrimes.mint(); // 9
+        nftPrimes.mint(); // 10
+        nftPrimes.mint(); // 11 PRIME
+        nftPrimes.mint(); // 12
+        nftPrimes.mint(); // 13 PRIME
+        nftPrimes.mint(); // 14
+        nftPrimes.mint(); // 15
+        nftPrimes.mint(); // 16
+        nftPrimes.mint(); // 17 PRIME
+        nftPrimes.mint(); // 18
+        nftPrimes.mint(); // 19 PRIME
+        nftPrimes.mint(); // 20
         vm.stopPrank();
 
-        // there are 4 primes in the array above
         uint256 primeCount = primeCounter.countPrimes(alice);
-        assertEq(primeCount, 4);
+        assertEq(primeCount, 8);
     }
-
-    function _printAllIds(address holder) private view {
-        uint256 count = nftPrimes.balanceOf(holder);
-        console.log("-------");
-        for (uint256 i; i < count;) {
-            console.log(nftPrimes.tokenOfOwnerByIndex(holder, i));
-            unchecked {
-                i++;
-            }
-        }
-        console.log("-------");
-    }
-
-    // function _getAllIds(address holder) private view returns (uint256[] memory) {
-    //     uint256 count = nftPrimes.balanceOf(holder);
-    //     uint256[] memory tokenIds = new uint256[](count);
-
-    //     for (uint256 i; i < count;) {
-    //         tokenIds[i] = nftPrimes.tokenOfOwnerByIndex(holder, i);
-    //         unchecked {
-    //             i++;
-    //         }
-    //     }
-
-    //     return tokenIds;
-    // }
 }

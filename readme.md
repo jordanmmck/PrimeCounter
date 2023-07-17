@@ -1,4 +1,4 @@
-# readme
+# Prime Counter
 
 ## spec
 

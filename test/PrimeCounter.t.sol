@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: UNLICENSED
-pragma solidity ^0.8.13;
+pragma solidity 0.8.18;
 
 import "forge-std/Test.sol";
 import "../src/PrimeCounter.sol";
@@ -39,7 +39,15 @@ contract PrimeCounterTest is Test {
         nftPrimes.mint(); // 20
         vm.stopPrank();
 
-        uint256 primeCount = primeCounter.countPrimes(alice);
-        assertEq(primeCount, 8);
+        assertEq(primeCounter.countPrimes(alice), 8);
+    }
+
+    function testMintFail() public {
+        vm.startPrank(alice);
+        for (uint256 i; i < 20; i++) {
+            nftPrimes.mint();
+        }
+        vm.expectRevert();
+        nftPrimes.mint();
     }
 }

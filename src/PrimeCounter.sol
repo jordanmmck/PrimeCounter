@@ -1,12 +1,13 @@
 // SPDX-License-Identifier: UNLICENSED
-pragma solidity ^0.8.13;
+pragma solidity 0.8.18;
 
 import {ERC721Enumerable} from "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
 
 contract PrimeCounter {
-    address public nftAddress;
+    address public immutable nftAddress;
 
     constructor(address _nftAddress) {
+        require(_nftAddress != address(0), "Invalid NFT address");
         nftAddress = _nftAddress;
     }
 
@@ -28,7 +29,7 @@ contract PrimeCounter {
     }
 
     function _countPrimes(uint256[] memory tokenIds) internal pure returns (uint256) {
-        uint256 primeCount;
+        uint256 primeCount = 0;
         uint256 len = tokenIds.length;
         for (uint256 i; i < len;) {
             if (_isPrime(tokenIds[i])) {
